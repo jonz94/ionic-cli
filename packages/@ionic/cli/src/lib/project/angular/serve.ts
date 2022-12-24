@@ -212,6 +212,8 @@ export class AngularServeCLI extends ServeCLI<AngularServeOptions> {
       port: options.port ? options.port.toString() : undefined,
       'source-map': options.sourcemaps !== false ? options.sourcemaps : 'false',
       'ssl': options.ssl !== false ? options.ssl : 'false',
+      'no-live-reload': options.livereload === false ? true : undefined,
+      'no-watch': options.livereload === false ? true : undefined,
     };
 
     const projectArgs = [];
