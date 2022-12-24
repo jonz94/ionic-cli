@@ -77,6 +77,14 @@ export class RunCommand extends CapacitorCommand implements CommandPreRun {
         summary: 'Provide a custom URL to the dev server',
         spec: { value: 'url' },
       },
+      {
+        name: 'flavor',
+        summary: 'Set the flavor of the Android project',
+      },
+      {
+        name: 'scheme',
+        summary: 'Set the scheme of the iOS project',
+      },
     ];
 
     const footnotes: Footnote[] = [
@@ -327,9 +335,19 @@ For Android and iOS, you can setup Remote Debugging on your device with browser 
     }
 
     const [ platform ] = inputs;
+    const shouldAppendFlavor = platform === 'android' && !!options['flavor'];
+    const shouldAppendScheme = platform === 'ios' && !!options['scheme'];
 
     await this.runCapacitorRunHook('capacitor:run:before', inputs, options, { ...this.env, project: this.project });
-    await this.runCapacitor(['run', platform, ...(shouldSync ? [] : ['--no-sync']), '--target', String(options['target'])]);
+    await this.runCapacitor([
+      'run',
+      platform,
+      ...(shouldSync ? [] : ['--no-sync']),
+      '--target',
+      String(options['target']),
+      ...(shouldAppendFlavor ? ['--flavor', String(options['flavor'])] : []),
+      ...(shouldAppendScheme ? ['--scheme', String(options['scheme'])] : []),
+    ])
   }
 
   protected async runCapacitorRunHook(name: CapacitorRunHookName, inputs: CommandLineInputs, options: CommandLineOptions, e: HookDeps): Promise<void> {
