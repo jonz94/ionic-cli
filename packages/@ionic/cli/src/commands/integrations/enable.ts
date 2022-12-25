@@ -1,4 +1,4 @@
-import { BaseError, contains, validators } from '@ionic/cli-framework';
+import { BaseError, MetadataGroup, contains, validators } from '@ionic/cli-framework';
 import * as path from 'path';
 
 import { CommandLineInputs, CommandLineOptions, CommandMetadata } from '../../definitions';
@@ -41,6 +41,13 @@ Integrations can be re-added with the ${input('--add')} option.
           name: 'quiet',
           summary: 'Less verbose output, ignore integration errors',
           type: Boolean,
+        },
+        {
+          name: 'deps',
+          summary: 'Do not install npm/yarn dependencies',
+          type: Boolean,
+          default: true,
+          groups: [MetadataGroup.ADVANCED],
         },
       ],
     };
