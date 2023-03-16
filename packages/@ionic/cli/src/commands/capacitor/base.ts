@@ -1,9 +1,9 @@
 import { pathExists } from '@ionic/utils-fs';
 import { onBeforeExit } from '@ionic/utils-process';
 import { ERROR_COMMAND_NOT_FOUND, SubprocessError } from '@ionic/utils-subprocess';
-import * as lodash from 'lodash';
-import * as path from 'path';
-import * as semver from 'semver';
+import lodash from 'lodash';
+import path from 'path';
+import semver from 'semver';
 
 import { CommandInstanceInfo, CommandLineInputs, CommandLineOptions, IonicCapacitorOptions, ProjectIntegration } from '../../definitions';
 import { input, weak } from '../../lib/color';
@@ -121,7 +121,7 @@ export abstract class CapacitorCommand extends Command {
       }
 
       return version;
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof SubprocessError) {
         if (e.code === ERROR_COMMAND_NOT_FOUND) {
           throw new FatalException('Error while getting Capacitor CLI version. Is Capacitor installed?');
@@ -213,7 +213,7 @@ export abstract class CapacitorCommand extends Command {
         const runner = await this.project.requireBuildRunner();
         const runnerOpts = runner.createOptionsFromCommandLine(inputs, generateOptionsForCapacitorBuild(inputs, options));
         await runner.run(runnerOpts);
-      } catch (e) {
+      } catch (e: any) {
         if (e instanceof RunnerException) {
           throw new FatalException(e.message);
         }
@@ -258,7 +258,7 @@ export abstract class CapacitorCommand extends Command {
 
         manifest.enableCleartextTraffic();
         await manifest.save();
-      }      
+      }
 
       if (platform === 'ios' && !options['external']) {
         const appInfo = await this.getiOSAppInfo();
@@ -270,7 +270,7 @@ export abstract class CapacitorCommand extends Command {
         appInfo.disableAppTransportSecurity();
         await appInfo.save();
       }
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof RunnerException) {
         throw new FatalException(e.message);
       }

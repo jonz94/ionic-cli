@@ -1,5 +1,5 @@
-import * as Debug from 'debug';
-import * as lodash from 'lodash';
+import Debug from 'debug';
+import lodash from 'lodash';
 
 import { Project } from '../';
 import { IAilmentRegistry, InfoItem } from '../../../definitions';
@@ -42,7 +42,7 @@ export class IonicAngularProject extends Project {
 
   async registerAilments(registry: IAilmentRegistry): Promise<void> {
     await super.registerAilments(registry);
-    const ailments = await import('./ailments');
+    const ailments = await import('./ailments.js');
     const deps = { ...this.e, project: this };
 
     registry.register(new ailments.IonicAngularUpdateAvailable(deps));
@@ -62,7 +62,7 @@ export class IonicAngularProject extends Project {
         debug(`${strong('ionic-angular')} detected in ${strong('package.json')}`);
         return true;
       }
-    } catch (e) {
+    } catch (e: any) {
       // ignore
     }
 
@@ -70,19 +70,19 @@ export class IonicAngularProject extends Project {
   }
 
   async requireBuildRunner(): Promise<import('./build').IonicAngularBuildRunner> {
-    const { IonicAngularBuildRunner } = await import('./build');
+    const { IonicAngularBuildRunner } = await import('./build.js');
     const deps = { ...this.e, project: this };
     return new IonicAngularBuildRunner(deps);
   }
 
   async requireServeRunner(): Promise<import('./serve').IonicAngularServeRunner> {
-    const { IonicAngularServeRunner } = await import('./serve');
+    const { IonicAngularServeRunner } = await import('./serve.js');
     const deps = { ...this.e, project: this };
     return new IonicAngularServeRunner(deps);
   }
 
   async requireGenerateRunner(): Promise<import('./generate').IonicAngularGenerateRunner> {
-    const { IonicAngularGenerateRunner } = await import('./generate');
+    const { IonicAngularGenerateRunner } = await import('./generate.js');
     const deps = { ...this.e, project: this };
     return new IonicAngularGenerateRunner(deps);
   }

@@ -90,7 +90,7 @@ export class ReactBuildCLI extends BuildCLI<ReactBuildOptions> {
   readonly script = BUILD_SCRIPT;
 
   protected async buildArgs(options: ReactBuildOptions): Promise<string[]> {
-    const { pkgManagerArgs } = await import('../../utils/npm');
+    const { pkgManagerArgs } = await import('../../utils/npm.js');
 
     if (this.resolvedProgram === this.program) {
       return ['build'];

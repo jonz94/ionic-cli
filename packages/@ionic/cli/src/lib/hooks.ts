@@ -1,8 +1,8 @@
 import { conform } from '@ionic/utils-array';
 import { prettyPath } from '@ionic/utils-terminal';
-import * as Debug from 'debug';
-import * as lodash from 'lodash';
-import * as path from 'path';
+import Debug from 'debug';
+import lodash from 'lodash';
+import path from 'path';
 
 import { HookFn, HookInput, HookName, IConfig, IProject, IShell } from '../definitions';
 
@@ -27,7 +27,7 @@ export abstract class Hook {
   constructor(protected readonly e: HookDeps) {}
 
   async run(input: HookInput) {
-    const { pkgManagerArgs } = await import('./utils/npm');
+    const { pkgManagerArgs } = await import('./utils/npm.js');
 
     const type = this.e.project.type;
 
@@ -82,7 +82,7 @@ export abstract class Hook {
             ...ctxEnvironment,
           },
         }));
-      } catch (e) {
+      } catch (e: any) {
         throw new HookException(
           `An error occurred while running an Ionic CLI hook defined in ${strong(prettyPath(this.e.project.filePath))}.\n` +
           `Hook: ${strong(this.name)}\n` +

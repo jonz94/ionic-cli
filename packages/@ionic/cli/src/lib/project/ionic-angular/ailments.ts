@@ -1,4 +1,4 @@
-import * as semver from 'semver';
+import semver from 'semver';
 
 import { ProjectType, TreatableAilment } from '../../../definitions';
 import { BUILD_SCRIPT } from '../../build';

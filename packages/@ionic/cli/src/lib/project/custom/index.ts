@@ -13,13 +13,13 @@ export class CustomProject extends Project {
   }
 
   async requireBuildRunner(): Promise<import('./build').CustomBuildRunner> {
-    const { CustomBuildRunner } = await import('./build');
+    const { CustomBuildRunner } = await import('./build.js');
     const deps = { ...this.e, project: this };
     return new CustomBuildRunner(deps);
   }
 
   async requireServeRunner(): Promise<import('./serve').CustomServeRunner> {
-    const { CustomServeRunner } = await import('./serve');
+    const { CustomServeRunner } = await import('./serve.js');
     const deps = { ...this.e, project: this };
     return new CustomServeRunner(deps);
   }

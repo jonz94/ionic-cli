@@ -6,7 +6,7 @@ import { FatalException } from '../../lib/errors';
 import { Hook, HookDeps } from '../../lib/hooks';
 
 import { CapacitorCommand } from './base';
-import * as semver from 'semver';
+import semver from 'semver';
 
 export class SyncCommand extends CapacitorCommand implements CommandPreRun {
   async getMetadata(): Promise<CommandMetadata> {
@@ -104,7 +104,7 @@ ${input('ionic capacitor sync')} will do the following:
         build: buildRunner.createOptionsFromCommandLine(inputs, options),
         capacitor: await this.createOptionsFromCommandLine(inputs, options),
       });
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof BaseError) {
         throw new FatalException(e.message);
       }

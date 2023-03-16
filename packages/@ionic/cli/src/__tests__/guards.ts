@@ -1,4 +1,4 @@
-import * as guards from '../guards';
+import guards from '../guards';
 
 type Guard = (o: any) => boolean;
 

@@ -1,8 +1,8 @@
 import { PackageJson } from '@ionic/cli-framework';
 import { readJson, writeJson } from '@ionic/utils-fs';
 import { stringWidth } from '@ionic/utils-terminal';
-import * as path from 'path';
-import * as semver from 'semver';
+import path from 'path';
+import semver from 'semver';
 
 import { IConfig, IonicEnvironment } from '../definitions';
 
@@ -43,7 +43,7 @@ export async function getUpdateConfig({ config }: GetUpdateConfigDeps): Promise<
 
   try {
     return await readUpdateConfig(dir);
-  } catch (e) {
+  } catch (e: any) {
     if (e.code !== 'ENOENT') {
       process.stderr.write(`${e.stack ? e.stack : e}\n`);
     }

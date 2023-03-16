@@ -1,6 +1,6 @@
 import { readFile } from '@ionic/utils-fs';
-import * as chalk from 'chalk';
-import * as path from 'path';
+import chalk from 'chalk';
+import path from 'path';
 
 import { TreatableAilment } from '../../../definitions';
 import { AppClient } from '../../app';

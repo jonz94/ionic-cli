@@ -23,7 +23,7 @@ Commands to help manage Ionic Enterprise[^enterprise-edition] subscriptions.
 
   async getCommands(): Promise<CommandMap> {
     return new CommandMap([
-      ['register', async () => { const { RegisterCommand } = await import('./register'); return new RegisterCommand(this); }],
+      ['register', async () => { const { RegisterCommand } = await import('./register.js'); return new RegisterCommand(this); }],
     ]);
   }
 }

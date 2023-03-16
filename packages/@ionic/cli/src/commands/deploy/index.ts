@@ -20,10 +20,10 @@ Appflow deploy documentation:
 
   async getCommands(): Promise<CommandMap> {
     return new CommandMap([
-      ['add', async () => { const { AddCommand } = await import('./add'); return new AddCommand(this); }],
-      ['configure', async () => { const { ConfigureCommand } = await import('./configure'); return new ConfigureCommand(this); }],
-      ['build', async () => { const { BuildCommand } = await import('./build'); return new BuildCommand(this); }],
-      ['manifest', async () => { const { DeployManifestCommand } = await import('./manifest'); return new DeployManifestCommand(this); }],
+      ['add', async () => { const { AddCommand } = await import('./add.js'); return new AddCommand(this); }],
+      ['configure', async () => { const { ConfigureCommand } = await import('./configure.js'); return new ConfigureCommand(this); }],
+      ['build', async () => { const { BuildCommand } = await import('./build.js'); return new BuildCommand(this); }],
+      ['manifest', async () => { const { DeployManifestCommand } = await import('./manifest.js'); return new DeployManifestCommand(this); }],
     ]);
   }
 }

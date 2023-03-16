@@ -1,4 +1,4 @@
-import * as android from '../android';
+import android from '../android';
 
 describe('@ionic/cli', () => {
 

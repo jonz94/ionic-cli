@@ -132,7 +132,7 @@ export class ReactServeCLI extends ServeCLI<ReactServeOptions> {
   }
 
   protected async buildArgs(options: ReactServeOptions): Promise<string[]> {
-    const { pkgManagerArgs } = await import('../../utils/npm');
+    const { pkgManagerArgs } = await import('../../utils/npm.js');
 
     if (this.resolvedProgram === this.program) {
       return ['start'];

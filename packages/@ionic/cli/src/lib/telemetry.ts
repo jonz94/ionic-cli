@@ -1,5 +1,5 @@
-import * as Debug from 'debug';
-import * as lodash from 'lodash';
+import Debug from 'debug';
+import lodash from 'lodash';
 
 import { IClient, IConfig, IProject, ISession, ITelemetry, InfoItem, IonicContext } from '../definitions';
 
@@ -76,7 +76,7 @@ export async function sendCommand({ config, client, getInfo, ctx, session, proje
       const leek = await getLeek({ config, version: ctx.version });
       try {
         await leek.track({ name, message });
-      } catch (e) {
+      } catch (e: any) {
         debug(`leek track error: ${e.stack ? e.stack : e}`);
       }
     })(),
@@ -117,7 +117,7 @@ export async function sendCommand({ config, client, getInfo, ctx, session, proje
 
       try {
         await client.do(req);
-      } catch (e) {
+      } catch (e: any) {
         debug(`metric send error: ${e.stack ? e.stack : e}`);
       }
     })(),

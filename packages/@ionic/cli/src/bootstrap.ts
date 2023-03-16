@@ -1,7 +1,7 @@
 import { compileNodeModulesPaths, readPackageJsonFile } from '@ionic/cli-framework/utils/node';
-import * as Debug from 'debug';
-import * as path from 'path';
-import * as semver from 'semver';
+import Debug from 'debug';
+import path from 'path';
+import semver from 'semver';
 
 import { strong } from './lib/color';
 
@@ -16,7 +16,7 @@ export async function detectLocalCLI(): Promise<string> {
 
   try {
     pkgPath = require.resolve('ionic/package', { paths: compileNodeModulesPaths(process.cwd()) });
-  } catch (e) {
+  } catch (e: any) {
     // ignore
   }
 

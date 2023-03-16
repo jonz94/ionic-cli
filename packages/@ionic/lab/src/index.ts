@@ -1,11 +1,11 @@
 import { Command, CommandLineInputs, CommandLineOptions, CommandMap, CommandMapDefault, Namespace, execute, validators } from '@ionic/cli-framework';
 import { readFile } from '@ionic/utils-fs';
-import * as chalk from 'chalk';
-import * as express from 'express';
-import * as http from 'http';
-import * as https from 'https';
-import * as path from 'path';
-import * as tls from 'tls';
+import chalk from 'chalk';
+import express from 'express';
+import http from 'http';
+import https from 'https';
+import path from 'path';
+import tls from 'tls';
 
 const WWW_DIRECTORY = path.join(__dirname, '..', 'www');
 
@@ -108,7 +108,7 @@ class DefaultCommand extends Command {
   async readPem(p: string): Promise<string> {
     try {
       return await readFile(p, { encoding: 'utf8' });
-    } catch (e) {
+    } catch (e: any) {
       process.stderr.write(String(e.stack ? e.stack : e) + '\n');
       throw new Error(`Error encountered with ${p}`);
     }

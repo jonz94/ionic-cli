@@ -1,9 +1,9 @@
 import { readPackageJsonFile } from '@ionic/cli-framework/utils/node';
 import { readFile, writeFile } from '@ionic/utils-fs';
 import { prettyPath } from '@ionic/utils-terminal';
-import * as Debug from 'debug';
-import * as et from 'elementtree';
-import * as path from 'path';
+import Debug from 'debug';
+import et from 'elementtree';
+import path from 'path';
 
 import { CordovaPackageJson, ProjectIntegration } from '../../../definitions';
 import { isCordovaPackageJson } from '../../../guards';
@@ -71,7 +71,7 @@ export class CordovaConfig {
     try {
       this._doc = et.parse(configXml);
       this._sessionid = shortid();
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`Cannot parse config.xml file: ${e.stack ? e.stack : e}`);
     }
 
@@ -234,7 +234,7 @@ export async function loadCordovaConfig(integration: Required<ProjectIntegration
 
   try {
     return await CordovaConfig.load(configXmlPath, packageJsonPath);
-  } catch (e) {
+  } catch (e: any) {
     const msg = e.code === 'ENOENT'
       ? (
           `Could not find necessary file(s): ${strong('config.xml')}, ${strong('package.json')}.\n\n` +

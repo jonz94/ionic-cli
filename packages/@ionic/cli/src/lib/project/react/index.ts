@@ -1,7 +1,7 @@
-import * as chalk from 'chalk';
-import * as Debug from 'debug';
-import * as lodash from 'lodash';
-import * as path from 'path';
+import chalk from 'chalk';
+import Debug from 'debug';
+import lodash from 'lodash';
+import path from 'path';
 
 import { Project } from '../';
 import { InfoItem } from '../../../definitions';
@@ -43,7 +43,7 @@ export class ReactProject extends Project {
         debug(`${chalk.bold('@ionic/React')} detected in ${chalk.bold('package.json')}`);
         return true;
       }
-    } catch (e) {
+    } catch (e: any) {
       // ignore
     }
 
@@ -55,13 +55,13 @@ export class ReactProject extends Project {
   }
 
   async requireBuildRunner(): Promise<import('./build').ReactBuildRunner> {
-    const { ReactBuildRunner } = await import('./build');
+    const { ReactBuildRunner } = await import('./build.js');
     const deps = { ...this.e, project: this };
     return new ReactBuildRunner(deps);
   }
 
   async requireServeRunner(): Promise<import('./serve').ReactServeRunner> {
-    const { ReactServeRunner } = await import('./serve');
+    const { ReactServeRunner } = await import('./serve.js');
     const deps = { ...this.e, project: this };
     return new ReactServeRunner(deps);
   }

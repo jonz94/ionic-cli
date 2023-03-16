@@ -1,5 +1,5 @@
 import { concurrentFilter } from '@ionic/utils-array';
-import * as Debug from 'debug';
+import Debug from 'debug';
 
 import { IAilment, IAilmentRegistry, TreatableAilment } from '../../definitions';
 import { isTreatableAilment } from '../../guards';
@@ -58,7 +58,7 @@ export abstract class DoctorCommand extends Command {
       try {
         detected = await ailment.detected();
         debug('Detected %s: %s', ailment.id, detected);
-      } catch (e) {
+      } catch (e: any) {
         this.env.log.error(
           `Error while checking ${strong(ailment.id)}:\n` +
           `${failure(e.stack ? e.stack : e)}`

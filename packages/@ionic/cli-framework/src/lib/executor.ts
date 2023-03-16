@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import * as lodash from 'lodash';
+import lodash from 'lodash';
 
 import { CommandInstanceInfo, CommandMetadata, CommandMetadataInput, CommandMetadataOption, ICommand, IExecutor, INamespace, NamespaceLocateResult } from '../definitions';
 import { BaseError, InputValidationError } from '../errors';
@@ -121,7 +121,7 @@ export class BaseExecutor<C extends ICommand<C, N, M, I, O>, N extends INamespac
 
     try {
       await command.validate(cmdinputs);
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof InputValidationError) {
         for (const err of e.errors) {
           this.stderr.write(`${err.message}\n`);
@@ -157,7 +157,7 @@ export class BaseExecutor<C extends ICommand<C, N, M, I, O>, N extends INamespac
    * channel, allowing request/response communication via RPC.
    */
   async rpc(): Promise<void> {
-    const { RPCProcess } = await import('../utils/ipc');
+    const { RPCProcess } = await import('../utils/ipc.js');
     const metadata = await this.namespace.getMetadata();
 
     const rpc = new RPCProcess({ name: metadata.name });
@@ -185,7 +185,7 @@ export async function execute<C extends ICommand<C, N, M, I, O>, N extends IName
 
   try {
     await executor.execute(argv, env);
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof BaseError) {
       executor.stderr.write(`Error: ${e.message}`);
       process.exitCode = typeof e.exitCode === 'undefined' ? 1 : e.exitCode;

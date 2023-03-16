@@ -1,6 +1,6 @@
 import { conform } from '@ionic/utils-array';
 import { readFile } from '@ionic/utils-fs';
-import * as Debug from 'debug';
+import Debug from 'debug';
 
 import { CreateRequestOptions, HttpMethod } from '../../definitions';
 

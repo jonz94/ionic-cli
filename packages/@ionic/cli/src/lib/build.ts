@@ -2,7 +2,7 @@ import { BaseError, MetadataGroup } from '@ionic/cli-framework';
 import { PromptModule } from '@ionic/cli-framework-prompts';
 import { createProcessEnv } from '@ionic/utils-process';
 import { ERROR_COMMAND_NOT_FOUND, SubprocessError } from '@ionic/utils-subprocess';
-import * as Debug from 'debug';
+import Debug from 'debug';
 
 import { BaseBuildOptions, BuildOptions, CommandLineInputs, CommandLineOptions, CommandMetadata, CommandMetadataOption, IConfig, ILogger, IProject, IShell, NpmClient, Runner } from '../definitions';
 
@@ -87,7 +87,7 @@ export abstract class BuildRunner<T extends BuildOptions<any>> implements Runner
 
     try {
       await hook.run({ name: hook.name, build: options });
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof BaseError) {
         throw new FatalException(e.message);
       }
@@ -113,7 +113,7 @@ export abstract class BuildRunner<T extends BuildOptions<any>> implements Runner
 
     try {
       await hook.run({ name: hook.name, build: options });
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof BaseError) {
         throw new FatalException(e.message);
       }
@@ -194,7 +194,7 @@ export abstract class BuildCLI<T extends object> {
   protected async runWrapper(options: T): Promise<void> {
     try {
       return await this.run(options);
-    } catch (e) {
+    } catch (e: any) {
       if (!(e instanceof BuildCLIProgramNotFoundException)) {
         throw e;
       }
@@ -227,7 +227,7 @@ export abstract class BuildCLI<T extends object> {
 
     try {
       await this.e.shell.run(this.resolvedProgram, args, { stdio: 'inherit', cwd: this.e.project.directory, fatalOnNotFound: false, env: createProcessEnv(env) });
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof SubprocessError && e.code === ERROR_COMMAND_NOT_FOUND) {
         throw new BuildCLIProgramNotFoundException(`${strong(this.resolvedProgram)} command not found.`);
       }
@@ -250,7 +250,7 @@ export abstract class BuildCLI<T extends object> {
   }
 
   protected async promptToInstall(): Promise<boolean> {
-    const { pkgManagerArgs } = await import('./utils/npm');
+    const { pkgManagerArgs } = await import('./utils/npm.js');
     const [ manager, ...managerArgs ] = await pkgManagerArgs(this.e.config.get('npmClient'), { command: 'install', pkg: this.pkg, saveDev: true, saveExact: true });
 
     this.e.log.nl();
@@ -282,7 +282,7 @@ abstract class PkgManagerBuildCLI extends BuildCLI<BaseBuildOptions> {
   }
 
   protected async buildArgs(options: BaseBuildOptions): Promise<string[]> {
-    const { pkgManagerArgs } = await import('./utils/npm');
+    const { pkgManagerArgs } = await import('./utils/npm.js');
     const [ , ...pkgArgs ] = await pkgManagerArgs(this.program, { command: 'run', script: this.script, scriptArgs: [...options['--'] || []] });
 
     return pkgArgs;

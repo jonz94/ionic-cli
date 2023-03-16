@@ -13,8 +13,8 @@ export class GitNamespace extends Namespace {
 
   async getCommands(): Promise<CommandMap> {
     return new CommandMap([
-      ['clone', async () => { const { GitCloneCommand } = await import('./clone'); return new GitCloneCommand(this); }],
-      ['remote', async () => { const { GitRemoteCommand } = await import('./remote'); return new GitRemoteCommand(this); }],
+      ['clone', async () => { const { GitCloneCommand } = await import('./clone.js'); return new GitCloneCommand(this); }],
+      ['remote', async () => { const { GitRemoteCommand } = await import('./remote.js'); return new GitRemoteCommand(this); }],
     ]);
   }
 }

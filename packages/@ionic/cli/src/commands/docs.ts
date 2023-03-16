@@ -36,7 +36,7 @@ export class DocsCommand extends Command {
     try {
       const { req } = await createRequest('HEAD', url, this.env.config.getHTTPConfig());
       await req;
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e) && e.response.status === 404) {
         this.env.log.warn(`Docs not found for your specific version of Ionic. Directing you to docs homepage.`);
         await openUrl(homepage, { app: browser });

@@ -133,7 +133,7 @@ class Ionic1ServeCLI extends ServeCLI<Ionic1ServeOptions> {
   }
 
   protected async buildArgs(options: Ionic1ServeOptions): Promise<string[]> {
-    const { pkgManagerArgs } = await import('../../utils/npm');
+    const { pkgManagerArgs } = await import('../../utils/npm.js');
 
     const args = [
       `--host=${options.host}`,

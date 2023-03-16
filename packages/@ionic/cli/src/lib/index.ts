@@ -1,8 +1,8 @@
 import { LOGGER_LEVELS } from '@ionic/cli-framework-output';
 import { createPromptModule } from '@ionic/cli-framework-prompts';
 import { TERMINAL_INFO, prettyPath } from '@ionic/utils-terminal';
-import * as Debug from 'debug';
-import * as path from 'path';
+import Debug from 'debug';
+import path from 'path';
 
 import { ERROR_VERSION_TOO_OLD } from '../bootstrap';
 import { IProject, InfoItem, IonicContext, IonicEnvironment, IonicEnvironmentFlags } from '../definitions';
@@ -51,7 +51,7 @@ export async function generateIonicEnvironment(ctx: IonicContext, pargv: string[
   const getInfo = async () => {
     const { default: osName } = await import('os-name');
     const semver = await import('semver');
-    const { getUpdateConfig } = await import('./updates');
+    const { getUpdateConfig } = await import('./updates.js');
 
     const os = osName();
 

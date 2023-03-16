@@ -110,7 +110,7 @@ export class AngularBuildCLI extends BuildCLI<AngularBuildOptions> {
   readonly script = BUILD_SCRIPT;
 
   protected async buildArgs(options: AngularBuildOptions): Promise<string[]> {
-    const { pkgManagerArgs } = await import('../../utils/npm');
+    const { pkgManagerArgs } = await import('../../utils/npm.js');
 
     const args = await this.buildOptionsToNgArgs(options);
 

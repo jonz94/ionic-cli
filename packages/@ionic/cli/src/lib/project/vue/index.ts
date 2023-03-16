@@ -1,7 +1,7 @@
-import * as chalk from 'chalk';
-import * as Debug from 'debug';
-import * as lodash from 'lodash';
-import * as path from 'path';
+import chalk from 'chalk';
+import Debug from 'debug';
+import lodash from 'lodash';
+import path from 'path';
 
 import { Project } from '../';
 import { InfoItem } from '../../../definitions';
@@ -43,7 +43,7 @@ export class VueProject extends Project {
         debug(`${chalk.bold('@ionic/vue')} detected in ${chalk.bold('package.json')}`);
         return true;
       }
-    } catch (e) {
+    } catch (e: any) {
       // ignore
     }
 
@@ -55,13 +55,13 @@ export class VueProject extends Project {
   }
 
   async requireBuildRunner(): Promise<import('./build').VueBuildRunner> {
-    const { VueBuildRunner } = await import('./build');
+    const { VueBuildRunner } = await import('./build.js');
     const deps = { ...this.e, project: this };
     return new VueBuildRunner(deps);
   }
 
   async requireServeRunner(): Promise<import('./serve').VueServeRunner> {
-    const { VueServeRunner } = await import('./serve');
+    const { VueServeRunner } = await import('./serve.js');
     const deps = { ...this.e, project: this };
     return new VueServeRunner(deps);
   }

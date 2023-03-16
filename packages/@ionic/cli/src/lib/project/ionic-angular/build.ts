@@ -1,5 +1,5 @@
 import { MetadataGroup, unparseArgs } from '@ionic/cli-framework';
-import * as Debug from 'debug';
+import Debug from 'debug';
 
 import { CommandLineInputs, CommandLineOptions, CommandMetadata, IonicAngularBuildOptions } from '../../../definitions';
 import { BUILD_SCRIPT, BuildCLI, BuildRunner, BuildRunnerDeps } from '../../build';
@@ -97,7 +97,7 @@ export class IonicAngularBuildCLI extends BuildCLI<IonicAngularBuildOptions> {
   }
 
   protected async buildArgs(options: IonicAngularBuildOptions): Promise<string[]> {
-    const { pkgManagerArgs } = await import('../../utils/npm');
+    const { pkgManagerArgs } = await import('../../utils/npm.js');
 
     const args = this.buildOptionsToAppScriptsArgs(options);
 

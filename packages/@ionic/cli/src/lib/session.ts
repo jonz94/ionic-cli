@@ -23,7 +23,7 @@ export class BaseSession {
       .send({});
       try {
         await this.e.client.do(req);
-      } catch (e) {}
+      } catch (e: any) {}
     }
     this.e.config.unset('org.id');
     this.e.config.unset('user.id');
@@ -120,7 +120,7 @@ export class ProSession extends BaseSession implements ISession {
       this.e.config.set('user.id', user.id);
       this.e.config.set('user.email', email);
       this.e.config.set('tokens.user', token);
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e) && (e.response.status === 401 || e.response.status === 403)) {
         throw new SessionException('Incorrect email or password.');
       }
@@ -134,7 +134,7 @@ export class ProSession extends BaseSession implements ISession {
   }
 
   async tokenLogin(token: string): Promise<void> {
-    const { UserClient } = await import('./user');
+    const { UserClient } = await import('./user.js');
 
     const userClient = new UserClient(token, this.e);
 
@@ -149,7 +149,7 @@ export class ProSession extends BaseSession implements ISession {
       this.e.config.set('user.id', user_id);
       this.e.config.set('user.email', user.email);
       this.e.config.set('tokens.user', token);
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e) && (e.response.status === 401 || e.response.status === 403)) {
         throw new SessionException('Invalid auth token.');
       }
@@ -159,7 +159,7 @@ export class ProSession extends BaseSession implements ISession {
   }
 
   async wizardLogin(): Promise<string|undefined> {
-    const { OpenIDFlow } = await import('./oauth/openid');
+    const { OpenIDFlow } = await import('./oauth/openid.js');
     const wizardUrl = new URL(this.e.config.getOpenIDOAuthConfig().authorizationUrl);
     wizardUrl.pathname = 'start';
     const flow = new OpenIDFlow({}, this.e, wizardUrl.href);
@@ -175,7 +175,7 @@ export class ProSession extends BaseSession implements ISession {
   }
 
   async webLogin(): Promise<void> {
-    const { OpenIDFlow } = await import('./oauth/openid');
+    const { OpenIDFlow } = await import('./oauth/openid.js');
     const flow = new OpenIDFlow({}, this.e);
     const token = await flow.run();
 
@@ -192,7 +192,7 @@ export class ProSession extends BaseSession implements ISession {
     // having a generic way to access the right refresh token flow
     switch (flowName) {
       case 'open_id':
-        const { OpenIDFlow } = await import('./oauth/openid');
+        const { OpenIDFlow } = await import('./oauth/openid.js');
         oauthflow = new OpenIDFlow({}, this.e);
         break;
       default:

@@ -1,5 +1,5 @@
 import { findClosestOpenPort } from '@ionic/utils-network';
-import * as Debug from 'debug';
+import Debug from 'debug';
 
 import { input, strong } from '../color';
 import { FatalException } from '../errors';
@@ -42,7 +42,7 @@ export async function findOpenIonicPorts(address: string, ports: Ports): Promise
     }
 
     return { port, livereloadPort, notificationPort };
-  } catch (e) {
+  } catch (e: any) {
     if (e.code !== 'EADDRNOTAVAIL') {
       throw e;
     }

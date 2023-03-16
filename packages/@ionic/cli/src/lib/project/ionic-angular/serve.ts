@@ -1,6 +1,6 @@
 import { MetadataGroup, ParsedArgs, unparseArgs } from '@ionic/cli-framework';
 import { str2num } from '@ionic/cli-framework/utils/string';
-import * as Debug from 'debug';
+import Debug from 'debug';
 
 import { CommandLineInputs, CommandLineOptions, CommandMetadata, IonicAngularServeOptions, ServeDetails } from '../../../definitions';
 import { ancillary, weak } from '../../color';
@@ -157,7 +157,7 @@ class IonicAngularServeCLI extends ServeCLI<IonicAngularServeOptions> {
   }
 
   protected async buildArgs(options: IonicAngularServeOptions): Promise<string[]> {
-    const { pkgManagerArgs } = await import('../../utils/npm');
+    const { pkgManagerArgs } = await import('../../utils/npm.js');
 
     const args = this.serveOptionsToAppScriptsArgs(options);
 

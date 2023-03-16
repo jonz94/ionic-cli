@@ -1,6 +1,6 @@
-import * as chalk from 'chalk';
-import * as lodash from 'lodash';
-import * as util from 'util';
+import chalk from 'chalk';
+import lodash from 'lodash';
+import util from 'util';
 
 import {
   APIResponse,
@@ -259,7 +259,7 @@ export function formatSuperAgentError(e: SuperAgentError): string {
   try {
     const r = transformAPIResponse(res);
     f += formatAPIResponse(req, r);
-  } catch (e) {
+  } catch (e: any) {
     f += (
       `HTTP Error ${statusCode}: ${req.method.toUpperCase()} ${req.url}\n` +
       '\n' + (res.text ? res.text.substring(0, FORMAT_ERROR_BODY_MAX_LENGTH) : '<no buffered body>')

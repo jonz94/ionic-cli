@@ -4,12 +4,12 @@ import { PromptModule } from '@ionic/cli-framework-prompts';
 import { str2num } from '@ionic/cli-framework/utils/string';
 import { NetworkInterface, findClosestOpenPort, getExternalIPv4Interfaces, isHostConnectable } from '@ionic/utils-network';
 import { createProcessEnv, killProcessTree, onBeforeExit, processExit } from '@ionic/utils-process';
-import * as chalk from 'chalk';
-import * as Debug from 'debug';
+import chalk from 'chalk';
+import Debug from 'debug';
 import { EventEmitter } from 'events';
-import * as lodash from 'lodash';
-import * as split2 from 'split2';
-import * as stream from 'stream';
+import lodash from 'lodash';
+import split2 from 'split2';
+import stream from 'stream';
 
 import { CommandLineInputs, CommandLineOptions, CommandMetadata, CommandMetadataOption, IConfig, ILogger, IProject, IShell, IonicEnvironmentFlags, LabServeDetails, NpmClient, Runner, ServeDetails, ServeOptions } from '../definitions';
 
@@ -180,7 +180,7 @@ export abstract class ServeRunner<T extends ServeOptions> implements Runner<T, S
 
     try {
       await hook.run({ name: hook.name, serve: options });
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof BaseError) {
         throw new FatalException(e.message);
       }
@@ -234,7 +234,7 @@ export abstract class ServeRunner<T extends ServeOptions> implements Runner<T, S
 
     try {
       await hook.run({ name: hook.name, serve: lodash.assign({}, options, details) });
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof BaseError) {
         throw new FatalException(e.message);
       }
@@ -463,7 +463,7 @@ export abstract class ServeCLI<T extends ServeCLIOptions> extends EventEmitter {
   protected async spawnWrapper(options: T): Promise<void> {
     try {
       return await this.spawn(options);
-    } catch (e) {
+    } catch (e: any) {
       if (!(e instanceof ServeCLIProgramNotFoundException)) {
         throw e;
       }
@@ -577,7 +577,7 @@ export abstract class ServeCLI<T extends ServeCLIOptions> extends EventEmitter {
   }
 
   protected async promptToInstall(): Promise<boolean> {
-    const { pkgManagerArgs } = await import('./utils/npm');
+    const { pkgManagerArgs } = await import('./utils/npm.js');
     const [ manager, ...managerArgs ] = await pkgManagerArgs(this.e.config.get('npmClient'), { command: 'install', pkg: this.pkg, saveDev: true, saveExact: true });
 
     this.e.log.nl();
@@ -609,7 +609,7 @@ abstract class PkgManagerServeCLI extends ServeCLI<ServeOptions> {
   }
 
   protected async buildArgs(options: ServeOptions): Promise<string[]> {
-    const { pkgManagerArgs } = await import('./utils/npm');
+    const { pkgManagerArgs } = await import('./utils/npm.js');
 
     // The Ionic CLI decides the host/port of the dev server, so --host and
     // --port are provided to the downstream npm script as a best-effort

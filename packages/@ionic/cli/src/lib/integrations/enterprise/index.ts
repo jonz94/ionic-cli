@@ -1,8 +1,8 @@
 import { BaseConfig, parseArgs } from '@ionic/cli-framework';
 import { createPromptChoiceSeparator } from '@ionic/cli-framework-prompts';
 import { readFile, writeFile } from '@ionic/utils-fs';
-import * as lodash from 'lodash';
-import * as path from 'path';
+import lodash from 'lodash';
+import path from 'path';
 
 import { BaseIntegration } from '../';
 import {
@@ -124,7 +124,7 @@ export class Integration extends BaseIntegration<EnterpriseProjectIntegration> {
     try {
       const res = await this.e.client.do(req);
       return res.data as ProductKey;
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e)) {
         if (e.response.status === 401 || e.response.status === 403) {
           throw new FatalException('Authorization Failed. Make sure you\'re logged into the correct account with access to the key. Try logging out and back in again.');
@@ -138,7 +138,7 @@ export class Integration extends BaseIntegration<EnterpriseProjectIntegration> {
   }
 
   protected async getAppClient() {
-    const { AppClient } = await import('../../../lib/app');
+    const { AppClient } = await import('../../../lib/app.js');
     const token = await this.e.session.getUserToken();
     return new AppClient(token, this.e);
   }
@@ -157,7 +157,7 @@ export class Integration extends BaseIntegration<EnterpriseProjectIntegration> {
   }
 
   protected async chooseApp(apps: App[], org: any): Promise<string> {
-    const { formatName } = await import('../../../lib/app');
+    const { formatName } = await import('../../../lib/app.js');
 
     const newAppChoice = {
       name: strong('Create A New App'),
@@ -192,7 +192,7 @@ export class Integration extends BaseIntegration<EnterpriseProjectIntegration> {
     try {
       const res = await this.e.client.do(req);
       return res.data as ProductKey;
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e)) {
         if (e.response.status === 401 || e.response.status === 403) {
           throw new FatalException('Authorization Failed. Make sure you\'re logged into the correct account with access to the key. Try logging out and back in again.');
@@ -217,7 +217,7 @@ export class Integration extends BaseIntegration<EnterpriseProjectIntegration> {
     let npmrc = '';
     try {
       npmrc = await readFile(path.join(this.e.project.directory , '.npmrc'), 'utf8');
-    } catch (e) {
+    } catch (e: any) {
       if (!e.message.includes('ENOENT')) {
         throw e;
       }

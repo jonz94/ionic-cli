@@ -1,5 +1,5 @@
 import { readFile, writeFile, unlink } from '@ionic/utils-fs';
-import * as et from 'elementtree';
+import et from 'elementtree';
 
 export const ANDROID_MANIFEST_FILE = 'AndroidManifest.xml';
 
@@ -38,7 +38,7 @@ export class CapacitorAndroidManifest {
 
     try {
       this._doc = et.parse(this.origManifestContent);
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`Cannot parse ${ANDROID_MANIFEST_FILE} file: ${e.stack ?? e}`);
     }
   }

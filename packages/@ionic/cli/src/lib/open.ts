@@ -1,4 +1,4 @@
-import * as Debug from 'debug';
+import Debug from 'debug';
 
 const debug = Debug('ionic:lib:open');
 

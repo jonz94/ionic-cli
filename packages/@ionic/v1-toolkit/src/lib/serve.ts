@@ -1,6 +1,6 @@
 import { pathExists, readFile } from '@ionic/utils-fs';
-import * as chalk from 'chalk';
-import * as path from 'path';
+import chalk from 'chalk';
+import path from 'path';
 
 import { ConfigFileProxy } from './config';
 import { DEV_SERVER_PREFIX, LiveReloadFunction, createDevLoggerServer, createDevServerHandler, createLiveReloadServer, injectDevServerScript, injectLiveReloadScript } from './dev-server';
@@ -96,7 +96,7 @@ export async function runServer(options: ServeOptions): Promise<ServeOptions> {
  * Create HTTP server
  */
 async function createHttpServer(options: ServeOptions): Promise<Application> {
-  const express = await import('express');
+  const { default: express } = await import('express');
   const app = express();
 
   /**
@@ -175,7 +175,7 @@ async function createHttpServer(options: ServeOptions): Promise<Application> {
 }
 
 async function attachProxy(app: Application, config: ProxyConfig) {
-  const proxyMiddleware = await import('http-proxy-middleware');
+  const { default: proxyMiddleware } = await import('http-proxy-middleware');
   app.use(config.mount, proxyMiddleware(config.mount, config));
 }
 

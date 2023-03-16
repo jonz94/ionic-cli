@@ -22,8 +22,8 @@ Appflow package documentation:
 
   async getCommands(): Promise<CommandMap> {
     return new CommandMap([
-      ['build', async () => { const { BuildCommand } = await import('./build'); return new BuildCommand(this); }],
-      ['deploy', async () => { const { DeployCommand } = await import('./deploy'); return new DeployCommand(this); }],
+      ['build', async () => { const { BuildCommand } = await import('./build.js'); return new BuildCommand(this); }],
+      ['deploy', async () => { const { DeployCommand } = await import('./deploy.js'); return new DeployCommand(this); }],
     ]);
   }
 }

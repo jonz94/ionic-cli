@@ -2,12 +2,12 @@ import { LOGGER_LEVELS } from '@ionic/cli-framework-output';
 import { createProcessEnv, killProcessTree, onBeforeExit } from '@ionic/utils-process';
 import { ERROR_COMMAND_NOT_FOUND, Subprocess, SubprocessError, SubprocessOptions, WhichOptions, which } from '@ionic/utils-subprocess';
 import { TERMINAL_INFO } from '@ionic/utils-terminal';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import { ChildProcess, SpawnOptions } from 'child_process';
-import * as Debug from 'debug';
-import * as path from 'path';
-import * as split2 from 'split2';
-import * as combineStreams from 'stream-combiner2';
+import Debug from 'debug';
+import path from 'path';
+import split2 from 'split2';
+import combineStreams from 'stream-combiner2';
 
 import { ILogger, IShell, IShellOutputOptions, IShellRunOptions, IShellSpawnOptions } from '../definitions';
 import { isExitCodeException } from '../guards';
@@ -78,7 +78,7 @@ export class Shell implements IShell {
       }
 
       await promise;
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof SubprocessError && e.code === ERROR_COMMAND_NOT_FOUND) {
         if (fatalOnNotFound) {
           throw new FatalException(`Command not found: ${input(command)}`, 127);
@@ -132,7 +132,7 @@ export class Shell implements IShell {
 
     try {
       return await proc.output();
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof SubprocessError && e.code === ERROR_COMMAND_NOT_FOUND) {
         if (fatalOnNotFound) {
           throw new FatalException(`Command not found: ${input(command)}`, 127);
@@ -171,7 +171,7 @@ export class Shell implements IShell {
     if (TERMINAL_INFO.windows) {
       try {
         return await this.which(command, { PATH: options.env && options.env.PATH ? options.env.PATH : process.env.PATH });
-      } catch (e) {
+      } catch (e: any) {
         // ignore
       }
     }
@@ -202,7 +202,7 @@ export class Shell implements IShell {
     try {
       const out = await proc.output();
       return out.split('\n').join(' ').trim();
-    } catch (e) {
+    } catch (e: any) {
       // no command info at this point
     }
   }

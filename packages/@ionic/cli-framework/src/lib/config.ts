@@ -1,8 +1,8 @@
 import { mkdirpSync } from '@ionic/utils-fs';
-import * as fs from 'fs';
-import * as lodash from 'lodash';
-import * as path from 'path';
-import * as writeFileAtomic from 'write-file-atomic';
+import fs from 'fs';
+import lodash from 'lodash';
+import path from 'path';
+import writeFileAtomic from 'write-file-atomic';
 
 export interface BaseConfigOptions {
   /**
@@ -32,7 +32,7 @@ export abstract class BaseConfig<T extends object> {
   get file() {
     try {
       return this._getFile();
-    } catch (e) {
+    } catch (e: any) {
       return {};
     }
   }
@@ -44,7 +44,7 @@ export abstract class BaseConfig<T extends object> {
       const config = typeof navigated === 'object' ? navigated : {};
 
       return lodash.assign({}, this.provideDefaults(config), config);
-    } catch (e) {
+    } catch (e: any) {
       if (e.code === 'ENOENT' || e.name === 'SyntaxError') {
         const value = this.provideDefaults({});
         const v = this.pathPrefix.length === 0 ? value : lodash.set({}, [...this.pathPrefix], value);

@@ -1,9 +1,9 @@
 import { PackageJson } from '@ionic/cli-framework';
 import { readJson } from '@ionic/utils-fs';
 import { prettyPath } from '@ionic/utils-terminal';
-import * as Debug from 'debug';
-import * as lodash from 'lodash';
-import * as path from 'path';
+import Debug from 'debug';
+import lodash from 'lodash';
+import path from 'path';
 
 import { Project } from '../';
 import { InfoItem } from '../../../definitions';
@@ -42,7 +42,7 @@ export class Ionic1Project extends Project {
     const [
       ionic1Version,
       [ v1ToolkitPkg ],
-    ] = await (Promise.all<string | undefined, [PackageJson | undefined, string | undefined]>([
+    ] = await (Promise.all([
       this.getFrameworkVersion(),
       this.getPackageJson('@ionic/v1-toolkit'),
     ]));
@@ -72,7 +72,7 @@ export class Ionic1Project extends Project {
         debug(`${strong('ionic')} detected in ${strong('bower.json')}`);
         return true;
       }
-    } catch (e) {
+    } catch (e: any) {
       // ignore
     }
 
@@ -96,7 +96,7 @@ export class Ionic1Project extends Project {
       try {
         const ionicVersionJson = await readJson(ionicVersionFilePath);
         return ionicVersionJson['version'];
-      } catch (e) {
+      } catch (e: any) {
         const bwr = await this.loadBowerJson();
         const deps = lodash.assign({}, bwr.dependencies, bwr.devDependencies);
 
@@ -112,7 +112,7 @@ export class Ionic1Project extends Project {
           return m[1];
         }
       }
-    } catch (e) {
+    } catch (e: any) {
       this.e.log.error(`Error with ${strong(prettyPath(bowerJsonPath))} file: ${e}`);
     }
   }
@@ -122,7 +122,7 @@ export class Ionic1Project extends Project {
       const bowerJsonPath = path.resolve(this.directory, 'bower.json');
       try {
         this.bowerJsonFile = await readBowerJsonFile(bowerJsonPath);
-      } catch (e) {
+      } catch (e: any) {
         if (e instanceof SyntaxError) {
           throw new FatalException(`Could not parse ${strong('bower.json')}. Is it a valid JSON file?`);
         } else if (e === ERROR_INVALID_BOWER_JSON) {
@@ -137,13 +137,13 @@ export class Ionic1Project extends Project {
   }
 
   async requireBuildRunner(): Promise<import('./build').Ionic1BuildRunner> {
-    const { Ionic1BuildRunner } = await import('./build');
+    const { Ionic1BuildRunner } = await import('./build.js');
     const deps = { ...this.e, project: this };
     return new Ionic1BuildRunner(deps);
   }
 
   async requireServeRunner(): Promise<import('./serve').Ionic1ServeRunner> {
-    const { Ionic1ServeRunner } = await import('./serve');
+    const { Ionic1ServeRunner } = await import('./serve.js');
     const deps = { ...this.e, project: this };
     return new Ionic1ServeRunner(deps);
   }

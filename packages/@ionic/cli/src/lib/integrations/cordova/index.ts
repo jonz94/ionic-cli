@@ -1,15 +1,15 @@
 import { copy, mkdirp, pathExists, readdirSafe, remove, stat } from '@ionic/utils-fs';
-import * as chalk from 'chalk';
-import * as Debug from 'debug';
-import * as lodash from 'lodash';
-import * as os from 'os';
-import * as path from 'path';
+import chalk from 'chalk';
+import Debug from 'debug';
+import lodash from 'lodash';
+import os from 'os';
+import path from 'path';
 
 import { BaseIntegration, IntegrationConfig } from '../';
 import { InfoItem, IntegrationAddDetails, IntegrationAddHandlers, IntegrationName, ProjectIntegration, ProjectPersonalizationDetails } from '../../../definitions';
 import { ancillary, input, strong } from '../../color';
 
-import * as configlib from './config';
+import configlib from './config';
 import { checkForUnsupportedProject } from './utils';
 
 const debug = Debug('ionic:lib:integrations:cordova');
@@ -84,7 +84,7 @@ export class Integration extends BaseIntegration<ProjectIntegration> {
         if (!overwrite) {
           blacklist.push(f);
         }
-      } catch (e) {
+      } catch (e: any) {
         if (e.code !== 'ENOENT') {
           throw e;
         }
@@ -125,13 +125,13 @@ export class Integration extends BaseIntegration<ProjectIntegration> {
   async getCordovaConfig(): Promise<configlib.CordovaConfig | undefined> {
     try {
       return await this.requireConfig();
-    } catch (e) {
+    } catch (e: any) {
       // ignore
     }
   }
 
   async requireConfig(): Promise<configlib.CordovaConfig> {
-    const { loadCordovaConfig } = await import('./config');
+    const { loadCordovaConfig } = await import('./config.js');
     const integration = this.e.project.requireIntegration('cordova');
     const conf = await loadCordovaConfig(integration);
 
@@ -139,7 +139,7 @@ export class Integration extends BaseIntegration<ProjectIntegration> {
   }
 
   async getInfo(): Promise<InfoItem[]> {
-    const { getAndroidSdkToolsVersion } = await import('./android');
+    const { getAndroidSdkToolsVersion } = await import('./android.js');
 
     const [
       cordovaVersion,
@@ -149,7 +149,7 @@ export class Integration extends BaseIntegration<ProjectIntegration> {
       iosDeploy,
       iosSim,
       androidSdkToolsVersion,
-    ] = await (Promise.all<string | undefined, string, string, string | undefined, string | undefined, string | undefined, string | undefined>([
+    ] = await (Promise.all([
       this.getCordovaVersion(),
       this.getCordovaPlatformVersions(),
       this.getCordovaPluginVersions(),
@@ -207,7 +207,7 @@ export class Integration extends BaseIntegration<ProjectIntegration> {
     try {
       const integration = this.e.project.requireIntegration('cordova');
       return this.e.shell.cmdinfo('cordova', ['-v', '--no-telemetry', '--no-update-notifier'], { cwd: integration.root });
-    } catch (e) {
+    } catch (e: any) {
       debug('Error while getting Cordova version: %O', e);
     }
   }
@@ -228,7 +228,7 @@ export class Integration extends BaseIntegration<ProjectIntegration> {
       }
 
       return platforms.join(', ');
-    } catch (e) {
+    } catch (e: any) {
       debug('Error while getting Cordova platforms: %O', e);
       return 'not available';
     }
@@ -261,7 +261,7 @@ export class Integration extends BaseIntegration<ProjectIntegration> {
       }
 
       return `${whitelistedPlugins.join(', ')}${count > 0 ? `, (and ${count} other plugins)` : ''}`;
-    } catch (e) {
+    } catch (e: any) {
       debug('Error while getting Cordova plugins: %O', e);
       return 'not available';
     }

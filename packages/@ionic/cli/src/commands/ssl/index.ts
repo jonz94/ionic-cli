@@ -17,7 +17,7 @@ These commands make it easy to manage SSL certificates for using HTTPS with ${in
 
   async getCommands(): Promise<CommandMap> {
     return new CommandMap([
-      ['generate', async () => { const { SSLGenerateCommand } = await import('./generate'); return new SSLGenerateCommand(this); }],
+      ['generate', async () => { const { SSLGenerateCommand } = await import('./generate.js'); return new SSLGenerateCommand(this); }],
       ['g', 'generate'],
     ]);
   }

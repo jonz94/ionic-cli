@@ -1,6 +1,6 @@
 import { MetadataGroup } from '@ionic/cli-framework';
 import { compileNodeModulesPaths } from '@ionic/cli-framework/utils/node';
-import * as Debug from 'debug';
+import Debug from 'debug';
 
 import { CommandMetadataOption } from '../../../definitions';
 import { weak } from '../../color';

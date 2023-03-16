@@ -1,7 +1,7 @@
 import { Footnote, MetadataGroup, validators } from '@ionic/cli-framework';
 import { onBeforeExit, sleepForever } from '@ionic/utils-process';
-import * as Debug from 'debug';
-import * as lodash from 'lodash';
+import Debug from 'debug';
+import lodash from 'lodash';
 
 import { CommandInstanceInfo, CommandLineInputs, CommandLineOptions, CommandMetadata, CommandMetadataOption, CommandPreRun, IShellRunOptions, ServeDetails } from '../../definitions';
 import { COMMON_BUILD_COMMAND_OPTIONS } from '../../lib/build';
@@ -244,7 +244,7 @@ Just like with ${input('ionic cordova build')}, you can pass additional options 
       } else {
         await this.runBuildDeploy(inputs, options);
       }
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof RunnerException) {
         throw new FatalException(e.message);
       }
@@ -325,7 +325,7 @@ Just like with ${input('ionic cordova build')}, you can pass additional options 
         const runner = await this.project.requireBuildRunner();
         const runnerOpts = runner.createOptionsFromCommandLine(inputs, generateOptionsForCordovaBuild(metadata, inputs, options));
         await runner.run(runnerOpts);
-      } catch (e) {
+      } catch (e: any) {
         if (e instanceof RunnerException) {
           throw new FatalException(e.message);
         }

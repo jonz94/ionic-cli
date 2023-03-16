@@ -1,6 +1,6 @@
 import { Footnote, MetadataGroup } from '@ionic/cli-framework';
 import { sleepForever } from '@ionic/utils-process';
-import * as lodash from 'lodash';
+import lodash from 'lodash';
 
 import { CommandInstanceInfo, CommandLineInputs, CommandLineOptions, CommandMetadata, CommandMetadataOption, CommandPreRun } from '../definitions';
 import { input, strong, weak } from '../lib/color';
@@ -139,7 +139,7 @@ Try the ${input('--lab')} option to see multiple platforms at once.`;
       const runnerOpts = runner.createOptionsFromCommandLine(inputs, options);
 
       await runner.run(runnerOpts);
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof RunnerException) {
         throw new FatalException(e.message);
       }

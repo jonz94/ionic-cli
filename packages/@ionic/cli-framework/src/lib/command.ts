@@ -1,5 +1,5 @@
 import { AliasedMap } from '@ionic/utils-object';
-import * as lodash from 'lodash';
+import lodash from 'lodash';
 
 import { CommandInstanceInfo, CommandLineInputs, CommandLineOptions, CommandMapGetter, CommandMetadata, CommandMetadataInput, CommandMetadataOption, CommandPathItem, HydratedCommandMetadata, HydratedNamespaceMetadata, ICommand, ICommandMap, INamespace, INamespaceMap, NamespaceLocateOptions, NamespaceLocateResult, NamespaceMapGetter, NamespaceMetadata, ValidationError } from '../definitions';
 import { InputValidationError } from '../errors';
@@ -29,7 +29,7 @@ export abstract class BaseCommand<C extends ICommand<C, N, M, I, O>, N extends I
       if (input.validators && input.validators.length > 0) {
         try {
           validate(argv[i], input.name, [...input.validators]);
-        } catch (e) {
+        } catch (e: any) {
           if (!(e instanceof InputValidationError)) {
             throw e;
           }

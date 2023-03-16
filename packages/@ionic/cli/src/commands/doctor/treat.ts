@@ -82,7 +82,7 @@ Optionally supply the ${input('id')} argument to attempt to fix a single issue. 
 
       try {
         await this.treatAilment(ailment);
-      } catch (e) {
+      } catch (e: any) {
         this.handleError(e);
       }
     } else {
@@ -101,7 +101,7 @@ Optionally supply the ${input('id')} argument to attempt to fix a single issue. 
         if (treated) {
           treatedAilments += 1;
         }
-      } catch (e) {
+      } catch (e: any) {
         this.handleError(e);
       }
     }
@@ -159,7 +159,7 @@ Optionally supply the ${input('id')} argument to attempt to fix a single issue. 
 
         try {
           await step.treat();
-        } catch (e) {
+        } catch (e: any) {
           if (!isExitCodeException(e) || e.exitCode > 0) {
             throw e;
           }

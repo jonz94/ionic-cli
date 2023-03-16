@@ -1,9 +1,9 @@
 import { createCaseInsensitiveObject } from '@ionic/utils-object';
 import { TERMINAL_INFO } from '@ionic/utils-terminal';
-import * as Debug from 'debug';
-import * as pathlib from 'path';
-import * as onSignalExit from 'signal-exit';
-import * as kill from 'tree-kill';
+import Debug from 'debug';
+import pathlib from 'path';
+import onSignalExit from 'signal-exit';
+import kill from 'tree-kill';
 
 const debug = Debug('ionic:utils-process');
 
@@ -135,7 +135,7 @@ const beforeExitHandlerWrapper = (signal: 'process.exit' | BeforeExitSignal) => 
   await Promise.all([...exitFns.values()].map(async fn => {
     try {
       await fn();
-    } catch (e) {
+    } catch (e: any) {
       debug('onBeforeExit handler: error from function: %O', e);
     }
   }));

@@ -3,9 +3,9 @@ import { LOGGER_LEVELS } from '@ionic/cli-framework-output';
 import { tmpfilepath } from '@ionic/utils-fs';
 import { columnar } from '@ionic/utils-terminal';
 import { sleep } from '@ionic/utils-process';
-import * as chalk from 'chalk';
-import * as Debug from 'debug';
-import * as fs from 'fs';
+import chalk from 'chalk';
+import Debug from 'debug';
+import fs from 'fs';
 
 import { CommandMetadata } from '../../definitions';
 import { isSuperAgentError } from '../../guards';
@@ -401,7 +401,7 @@ if you do not wish to download ${input('apk')}.
     try {
       const res = await this.env.client.do(req);
       return res.data as PackageBuild;
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e)) {
         if (e.response.status === 401) {
           this.env.log.error('Try logging out and back in again.');
@@ -421,7 +421,7 @@ if you do not wish to download ${input('apk')}.
     try {
       const res = await this.env.client.do(req);
       return res.data as PackageBuild;
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e)) {
         if (e.response.status === 401) {
           this.env.log.error('Try logging out and back in again.');
@@ -441,7 +441,7 @@ if you do not wish to download ${input('apk')}.
     try {
       const res = await this.env.client.do(req);
       return res.data as DownloadUrl;
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e)) {
         if (e.response.status === 401) {
           this.env.log.error('Try logging out and back in again.');
@@ -475,7 +475,7 @@ if you do not wish to download ${input('apk')}.
           start = trace.length;
         }
         errorsEncountered = 0;
-      } catch (e) {
+      } catch (e: any) {
         // Retry up to 3 times in the case of an error.
         errorsEncountered++;
         ws.write(chalk.yellow(`Encountered error: ${e} while fetching build data retrying.`));

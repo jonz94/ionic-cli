@@ -27,7 +27,7 @@ export class App {
     req.addEventListener('load', function() {
       try {
         self.details = JSON.parse(this.responseText);
-      } catch (e) {
+      } catch (e: any) {
         console.error('Error loading app details from Ionic Lab API!');
         console.error('Response was:', this.responseText);
       }

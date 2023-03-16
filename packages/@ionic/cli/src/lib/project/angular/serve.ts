@@ -2,7 +2,7 @@ import { MetadataGroup, ParsedArgs, unparseArgs } from '@ionic/cli-framework';
 import { str2num } from '@ionic/cli-framework/utils/string';
 import { findClosestOpenPort } from '@ionic/utils-network';
 import { stripAnsi } from '@ionic/utils-terminal';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 
 import { AngularServeOptions, CommandLineInputs, CommandLineOptions, CommandMetadata, ServeDetails } from '../../../definitions';
 import { input, strong, weak } from '../../color';
@@ -193,7 +193,7 @@ export class AngularServeCLI extends ServeCLI<AngularServeOptions> {
   }
 
   protected async buildArgs(options: AngularServeOptions): Promise<string[]> {
-    const { pkgManagerArgs } = await import('../../utils/npm');
+    const { pkgManagerArgs } = await import('../../utils/npm.js');
 
     const args = await this.serveOptionsToNgArgs(options);
 

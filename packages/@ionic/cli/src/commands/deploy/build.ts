@@ -3,9 +3,9 @@ import { LOGGER_LEVELS } from '@ionic/cli-framework-output';
 import { sleep } from '@ionic/utils-process';
 import { tmpfilepath } from '@ionic/utils-fs';
 import { columnar } from '@ionic/utils-terminal';
-import * as chalk from 'chalk';
-import * as Debug from 'debug';
-import * as fs from 'fs';
+import chalk from 'chalk';
+import Debug from 'debug';
+import fs from 'fs';
 
 import { CommandMetadata } from '../../definitions';
 import { isSuperAgentError } from '../../guards';
@@ -105,7 +105,7 @@ Customizing the build:
     this.env.log.warn(IONIC_CLOUD_CLI_MIGRATION);
   }
 
-  async run(inputs: CommandLineInputs, options: CommandLineOptions): Promise<void> {    
+  async run(inputs: CommandLineInputs, options: CommandLineOptions): Promise<void> {
     if (!this.project) {
       throw new FatalException(`Cannot run ${input('ionic deploy build')} outside a project directory.`);
     }
@@ -175,7 +175,7 @@ Customizing the build:
     try {
       const res = await this.env.client.do(req);
       return res.data as DeployBuild;
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e)) {
         if (e.response.status === 401) {
           this.env.log.error('Try logging out and back in again.');
@@ -209,7 +209,7 @@ Customizing the build:
           start = trace.length;
         }
         errorsEncountered = 0;
-      } catch (e) {
+      } catch (e: any) {
         // Retry up to 3 times in the case of an error.
         errorsEncountered++;
         ws.write(chalk.yellow(`Encountered error: ${e} while fetching build data retrying.`));
@@ -231,7 +231,7 @@ Customizing the build:
     try {
       const res = await this.env.client.do(req);
       return res.data as DeployBuild;
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e)) {
         if (e.response.status === 401) {
           this.env.log.error('Try logging out and back in again.');
@@ -251,7 +251,7 @@ Customizing the build:
     try {
       const res = await this.env.client.do(req);
       return res.data as DownloadUrl;
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e)) {
         if (e.response.status === 401) {
           this.env.log.error('Try logging out and back in again.');

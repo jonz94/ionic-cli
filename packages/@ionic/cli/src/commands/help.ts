@@ -30,7 +30,7 @@ export class HelpCommand extends Command {
   }
 
   async run(inputs: CommandLineInputs, options: CommandLineOptions): Promise<void> {
-    const { CommandSchemaHelpFormatter, CommandStringHelpFormatter, NamespaceSchemaHelpFormatter, NamespaceStringHelpFormatter } = await import('../lib/help');
+    const { CommandSchemaHelpFormatter, CommandStringHelpFormatter, NamespaceSchemaHelpFormatter, NamespaceStringHelpFormatter } = await import('../lib/help.js');
     const location = await this.namespace.locate(inputs);
 
     if (isCommand(location.obj)) {

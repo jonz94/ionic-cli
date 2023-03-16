@@ -1,8 +1,8 @@
 import { createProcessEnv } from '@ionic/utils-process';
 import { ReadableStreamBuffer, WritableStreamBuffer } from '@ionic/utils-stream';
 import { EventEmitter } from 'events';
-import * as os from 'os';
-import * as path from 'path';
+import os from 'os';
+import path from 'path';
 
 const promisifyEvent = (emitter: EventEmitter, event: string | symbol): Promise<any> => {
   return new Promise<any>((resolve, reject) => {
@@ -331,7 +331,7 @@ describe('@ionic/utils-subprocess', () => {
       cp.emit('close', 1);
       try {
         await p;
-      } catch (e) {
+      } catch (e: any) {
         if (!(e instanceof SubprocessError)) {
           throw new Error('not SubprocessError');
         }
@@ -366,7 +366,7 @@ describe('@ionic/utils-subprocess', () => {
       cp.emit('close', 1);
       try {
         await p;
-      } catch (e) {
+      } catch (e: any) {
         if (!(e instanceof SubprocessError)) {
           throw new Error('not SubprocessError');
         }

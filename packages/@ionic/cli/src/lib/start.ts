@@ -1,6 +1,6 @@
 import { readJson } from '@ionic/utils-fs';
 import { columnar } from '@ionic/utils-terminal';
-import * as lodash from 'lodash';
+import lodash from 'lodash';
 
 import { COLUMNAR_OPTIONS, PROJECT_TYPES } from '../constants';
 import { CommandLineOptions, IConfig, ILogger, ProjectType, StarterList, StarterManifest, StarterTemplate } from '../definitions';
@@ -103,7 +103,7 @@ export async function readStarterManifest(p: string): Promise<StarterManifest> {
     }
 
     return manifest;
-  } catch (e) {
+  } catch (e: any) {
     if (e.code === 'ENOENT') {
       throw new Error(`${p} not found`);
     } else if (e instanceof SyntaxError) {

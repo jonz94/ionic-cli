@@ -53,7 +53,7 @@ export abstract class Command extends BaseCommand<ICommand, INamespace, CommandM
 
     try {
       await this.validate(inputs);
-    } catch (e) {
+    } catch (e: any) {
       if (!this.env.flags.interactive) {
         this.env.log.warn(`Command ran non-interactively due to ${input('--no-interactive')} flag, CI being detected, non-TTY, or a config setting.`);
       }
@@ -65,7 +65,7 @@ export abstract class Command extends BaseCommand<ICommand, INamespace, CommandM
 
     const telemetryPromise = (async () => {
       if (this.env.config.get('telemetry') !== false && !TERMINAL_INFO.ci && TERMINAL_INFO.tty) {
-        const { Telemetry } = await import('./telemetry');
+        const { Telemetry } = await import('./telemetry.js');
 
         let cmdInputs: CommandLineInputs = [];
         const metadata = await this.getMetadata();

@@ -24,12 +24,12 @@ To begin, run ${input('ionic ssh setup')}, which lets you use existing keys or g
 
   async getCommands(): Promise<CommandMap> {
     return new CommandMap([
-      ['generate', async () => { const { SSHGenerateCommand } = await import('./generate'); return new SSHGenerateCommand(this); }],
-      ['use', async () => { const { SSHUseCommand } = await import('./use'); return new SSHUseCommand(this); }],
-      ['add', async () => { const { SSHAddCommand } = await import('./add'); return new SSHAddCommand(this); }],
-      ['delete', async () => { const { SSHDeleteCommand } = await import('./delete'); return new SSHDeleteCommand(this); }],
-      ['list', async () => { const { SSHListCommand } = await import('./list'); return new SSHListCommand(this); }],
-      ['setup', async () => { const { SSHSetupCommand } = await import('./setup'); return new SSHSetupCommand(this); }],
+      ['generate', async () => { const { SSHGenerateCommand } = await import('./generate.js'); return new SSHGenerateCommand(this); }],
+      ['use', async () => { const { SSHUseCommand } = await import('./use.js'); return new SSHUseCommand(this); }],
+      ['add', async () => { const { SSHAddCommand } = await import('./add.js'); return new SSHAddCommand(this); }],
+      ['delete', async () => { const { SSHDeleteCommand } = await import('./delete.js'); return new SSHDeleteCommand(this); }],
+      ['list', async () => { const { SSHListCommand } = await import('./list.js'); return new SSHListCommand(this); }],
+      ['setup', async () => { const { SSHSetupCommand } = await import('./setup.js'); return new SSHSetupCommand(this); }],
       ['ls', 'list'],
       ['remove', 'delete'],
       ['rm', 'delete'],

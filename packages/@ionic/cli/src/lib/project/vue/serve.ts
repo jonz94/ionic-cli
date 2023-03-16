@@ -99,7 +99,7 @@ export class VueServeCLI extends ServeCLI<VueServeOptions> {
   }
 
   protected async buildArgs(_options: VueServeOptions): Promise<string[]> {
-    const { pkgManagerArgs } = await import('../../utils/npm');
+    const { pkgManagerArgs } = await import('../../utils/npm.js');
 
     const separatedArgs = _options['--']
 

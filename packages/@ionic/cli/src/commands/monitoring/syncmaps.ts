@@ -1,7 +1,7 @@
 import { pathExists, readFile, readdirSafe } from '@ionic/utils-fs';
 import { columnar, prettyPath } from '@ionic/utils-terminal';
-import * as Debug from 'debug';
-import * as path from 'path';
+import Debug from 'debug';
+import path from 'path';
 
 import { APIResponseSuccess, CommandLineInputs, CommandLineOptions, CommandMetadata } from '../../definitions';
 import { isSuperAgentError } from '../../guards';
@@ -125,7 +125,7 @@ By default, ${input('ionic monitoring syncmaps')} will upload the sourcemap file
       const res = await this.env.client.do(req);
 
       return this.uploadSourcemap(res, file);
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e)) {
         this.env.log.error(`Unable to sync map ${file}: ` + e.message);
         if (e.response.status === 401) {

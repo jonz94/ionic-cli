@@ -1,7 +1,7 @@
 import { readFile } from '@ionic/utils-fs';
-import * as chalk from 'chalk';
-import * as path from 'path';
-import * as util from 'util';
+import chalk from 'chalk';
+import path from 'path';
+import util from 'util';
 
 export type Application = import('express').Application;
 export type RequestHandler = import('express').RequestHandler;
@@ -86,7 +86,7 @@ function getDevServerScript() {
 }
 
 export async function createLiveReloadServer({ host, port, wwwDir }: { host: string, port: number; wwwDir: string; }): Promise<LiveReloadFunction> {
-  const tinylr = await import('tiny-lr');
+  const { default: tinylr } = await import('tiny-lr');
   const lrserver = tinylr();
   lrserver.listen(port, host);
 
@@ -129,7 +129,7 @@ function getLiveReloadScript(port: number) {
 }
 
 export async function createDevLoggerServer(host: string, port: number): Promise<Server> {
-  const WebSocket = await import('ws');
+  const { default: WebSocket } = await import('ws');
 
   const wss = new WebSocket.Server({ host, port });
 
@@ -138,9 +138,8 @@ export async function createDevLoggerServer(host: string, port: number): Promise
       let msg;
 
       try {
-        data = data.toString();
-        msg = JSON.parse(data);
-      } catch (e) {
+        msg = JSON.parse(data.toString());
+      } catch (e: any) {
         process.stderr.write(`Error parsing JSON message from dev server: "${data}" ${chalk.red(e.stack ? e.stack : e)}\n`);
         return;
       }

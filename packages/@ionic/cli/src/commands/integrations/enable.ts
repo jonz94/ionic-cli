@@ -1,5 +1,5 @@
 import { BaseError, contains, validators } from '@ionic/cli-framework';
-import * as path from 'path';
+import path from 'path';
 
 import { CommandLineInputs, CommandLineOptions, CommandMetadata } from '../../definitions';
 import { isIntegrationName } from '../../guards';
@@ -86,7 +86,7 @@ Integrations can be re-added with the ${input('--add')} option.
           this.env.log.ok(`Integration ${input(integration.name)} enabled!`);
         }
       }
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof BaseError) {
         if (quiet) {
           this.env.log.error(e.message);

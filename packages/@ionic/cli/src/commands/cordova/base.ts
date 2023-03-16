@@ -2,8 +2,8 @@ import { MetadataGroup } from '@ionic/cli-framework';
 import { mkdirp, pathExists } from '@ionic/utils-fs';
 import { ERROR_COMMAND_NOT_FOUND, ERROR_SIGNAL_EXIT, SubprocessError } from '@ionic/utils-subprocess';
 import { prettyPath } from '@ionic/utils-terminal';
-import * as lodash from 'lodash';
-import * as path from 'path';
+import lodash from 'lodash';
+import path from 'path';
 
 import { CommandInstanceInfo, CommandMetadataOption, IShellRunOptions, ProjectIntegration } from '../../definitions';
 import { input, strong, weak } from '../../lib/color';
@@ -160,7 +160,7 @@ export abstract class CordovaCommand extends Command {
 
     try {
       await this.env.shell.run('cordova', argList, { fatalOnNotFound, truncateErrorOutput, cwd: this.integration.root, ...options });
-    } catch (e) {
+    } catch (e: any) {
       if (e instanceof SubprocessError) {
         if (e.code === ERROR_COMMAND_NOT_FOUND) {
           const installArgs = await pkgManagerArgs(this.env.config.get('npmClient'), { command: 'install', pkg: 'cordova', global: true });

@@ -8,7 +8,7 @@ import {
 import { LOGGER_LEVELS } from '@ionic/cli-framework-output';
 import { sleep } from '@ionic/utils-process';
 import { columnar } from '@ionic/utils-terminal';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 
 import { CommandMetadata } from '../../definitions';
 import { isSuperAgentError } from '../../guards';
@@ -110,7 +110,7 @@ Both can be retrieved from the Dashboard[^dashboard].
   async run(
     inputs: CommandLineInputs,
     options: CommandLineOptions
-  ): Promise<void> {    
+  ): Promise<void> {
     if (!this.project) {
       throw new FatalException(
         `Cannot run ${input(
@@ -169,7 +169,7 @@ Both can be retrieved from the Dashboard[^dashboard].
     try {
       const res = await this.env.client.do(req);
       return res.data as DistributionBuild;
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e)) {
         if (e.response.status === 401) {
           this.env.log.error('Try logging out and back in again.');
@@ -235,7 +235,7 @@ Both can be retrieved from the Dashboard[^dashboard].
     try {
       const res = await this.env.client.do(req);
       return res.data as PackageBuild;
-    } catch (e) {
+    } catch (e: any) {
       if (isSuperAgentError(e)) {
         if (e.response.status === 401) {
           this.env.log.error('Try logging out and back in again.');

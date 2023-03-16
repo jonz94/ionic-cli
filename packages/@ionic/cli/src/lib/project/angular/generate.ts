@@ -1,6 +1,6 @@
 import { unparseArgs, validators } from '@ionic/cli-framework';
-import * as Debug from 'debug';
-import * as lodash from 'lodash';
+import Debug from 'debug';
+import lodash from 'lodash';
 
 import { AngularGenerateOptions, CommandLineInputs, CommandLineOptions, CommandMetadata } from '../../../definitions';
 import { ancillary, input, strong } from '../../color';
@@ -117,7 +117,7 @@ To test a generator before file modifications are made, use the ${input('--dry-r
 
     try {
       await this.generateComponent(type, name, lodash.omit(options, 'type', 'name'));
-    } catch (e) {
+    } catch (e: any) {
       debug(e);
       throw new FatalException(`Could not generate ${input(type)}.`);
     }

@@ -1,5 +1,5 @@
 import { PackageJson } from '@ionic/cli-framework';
-import * as Debug from 'debug';
+import Debug from 'debug';
 
 import { IAilment, IAilmentRegistry, IClient, IConfig, ILogger, IProject, ISession, IShell, PatientTreatmentStep, ProjectType } from '../../../definitions';
 
@@ -49,7 +49,7 @@ export abstract class Ailment implements IAilment {
   async getLocalPackageJson(pkgName: string): Promise<PackageJson | undefined> {
     try {
       return await this.project.requirePackageJson(pkgName);
-    } catch (e) {
+    } catch (e: any) {
       if (e.fatal) {
         throw e;
       }

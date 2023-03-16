@@ -39,7 +39,7 @@ class Ionic1BuildCLI extends BuildCLI<Ionic1BuildOptions> {
   readonly script = BUILD_SCRIPT;
 
   protected async buildArgs(options: Ionic1BuildOptions): Promise<string[]> {
-    const { pkgManagerArgs } = await import('../../utils/npm');
+    const { pkgManagerArgs } = await import('../../utils/npm.js');
 
     if (this.resolvedProgram === this.program) {
       return ['build'];
